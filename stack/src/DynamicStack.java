@@ -1,4 +1,3 @@
-import java.util.Arrays;
 public class DynamicStack extends Stack {
     private static final int DEFAULT_CAPACITY = 10;
     private Item[] stackArray;
@@ -8,6 +7,7 @@ public class DynamicStack extends Stack {
         stackArray = new Item[DEFAULT_CAPACITY];
         size = 0;
     }
+
     public DynamicStack(int initialSize) {
         stackArray = new Item[initialSize];
         size = 0;
@@ -22,6 +22,7 @@ public class DynamicStack extends Stack {
 
     @Override
     public Item pop() {
+        shrinkCapacity(size);
         if (!isEmpty()) {
             Item poppedItem = stackArray[size - 1];
             stackArray[size - 1] = null;
@@ -44,7 +45,19 @@ public class DynamicStack extends Stack {
 
     private void ensureCapacity(int capacity) {
         if (capacity > stackArray.length) {
-            int newCapacity = Math.max(stackArray.length * 2, capacity);
+            int newCapacity = stackArray.length * 2;
+            Item[] newStackArray = new Item[newCapacity];
+            for (int i = 0; i < size; i++) {
+                newStackArray[i] = stackArray[i];
+            }
+            stackArray = newStackArray;
+        }
+    }
+
+    private void shrinkCapacity(int capacity) {
+        if (stackArray.length > capacity * 4) {
+            int newCapacity = stackArray.length / 2;
+            System.out.println("capacity: " + capacity + "\t new capacity: " + newCapacity + " old capasity: " + stackArray.length);
             Item[] newStackArray = new Item[newCapacity];
             for (int i = 0; i < size; i++) {
                 newStackArray[i] = stackArray[i];
