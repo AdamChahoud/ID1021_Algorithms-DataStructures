@@ -12,7 +12,7 @@ public class Benchmark {
             System.out.println("Dynamic stack benchmarks");
             for (int stackSize = 100; stackSize <= maxStackSize ; stackSize += stepSize) {
 
-                DynamicStack dynamicStack = new DynamicStack();
+                DynamicStack dynamicStack = new DynamicStack(15);
                 long startTime = System.nanoTime();
 
                 for (int i = 0; i < stackSize; i++) {

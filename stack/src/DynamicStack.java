@@ -8,6 +8,10 @@ public class DynamicStack extends Stack {
         stackArray = new Item[DEFAULT_CAPACITY];
         size = 0;
     }
+    public DynamicStack(int initialSize) {
+        stackArray = new Item[initialSize];
+        size = 0;
+    }
 
     @Override
     public void push(Item item) {
